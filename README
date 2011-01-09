@@ -1,0 +1,20 @@
+Home Video Player
+
+An HTML5 based video player for reading content from your PC on your other PCs.
+
+CONFIGURATION
+
+Web server: Apache, Lighttpd
+	PHP
+	PostgreSQL
+
+INSTALLATION
+
+Copy directories.dist.php to directories.php.
+This file contains the local directories on your web server that contain video files.
+
+Create the PostgreSQL database videos right from the videos.sql file.
+$ createuser --no-superuser videos
+$ createdb videos
+$ psql videos videos -f videos.sql
+

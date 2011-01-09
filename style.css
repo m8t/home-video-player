@@ -1,0 +1,145 @@
+header, footer, article, section, nav, menu, hgroup {
+display: block;
+}
+
+body {
+padding: 0;
+margin: 0;
+background-color: #111;
+color: #ccc;
+font-family: sans-serif;
+}
+
+header {
+margin: 0;
+padding: 0.2em 0;
+text-align: center;
+background: -webkit-gradient(linear, left top, left bottom, from(#090909), to(#111));
+}
+
+header h1 {
+margin: 0;
+padding: 0.2em 0;
+color: rgb(145,72,0);
+font-size: 1.4em;
+letter-spacing: 0.2em;
+text-shadow: rgb(255,128,0) 0px 0px 1px;
+opacity: 0.6;
+}
+
+header h2 {
+margin: 0;
+padding: 0.2em 0;
+font-size: 0.8em;
+text-shadow: #ccc 0px 0px 3px;
+}
+
+footer {
+clear: both;
+margin: 0.6em;
+padding: 0.3em;
+text-align: center;
+text-shadow: #000 1px 1px 1px;
+opacity: 0.6;
+}
+
+footer ul {
+display: inline;
+list-style: none;
+}
+
+footer ul li {
+display: inline;
+}
+
+footer ul li:first-child:before {
+content: '';
+}
+
+footer ul li:before {
+content: '- ';
+}
+
+footer ul li a {
+color: #ccc;
+text-decoration: none;
+}
+
+footer ul li a:hover {
+text-decoration: underline;
+}
+
+div#video-player {
+display: table;
+margin: 0 auto;
+}
+
+div#video-player div#video {
+width: 848px;
+height: 540px;
+background-color: black;
+border-radius: 0.3em;
+-moz-border-radius: 0.3em;
+border-style: solid;
+border-color: gray;
+border-width: 1px;
+-webkit-box-shadow: 0px 0px 3px #000;
+-moz-box-shadow: 0px 0px 3px #000;
+box-shadow: 0px 0px 3px #000;
+display: table-cell;
+}
+
+div#video-player div#playlist {
+display: table-cell;
+vertical-align: top;
+}
+
+div#video-player div#playlist ul {
+display: block;
+list-style: none;
+margin: 8px 0 0 0;
+padding: 0;
+overflow: auto;
+height: 524px; /* video-player-height - 2 * this.margin-top */
+min-width: 60px;
+max-width: 260px;
+background-color: #090909;
+border-radius: 0 0.3em 0.3em 0;
+-moz-border-radius: 0 0.3em 0.3em 0;
+border-style: solid;
+border-color: gray;
+border-width: 1px 1px 1px 0;
+-webkit-box-shadow: 0px 0px 3px #000;
+-moz-box-shadow: 0px 0px 3px #000;
+box-shadow: 0px 0px 3px #000;
+}
+
+div#video-player div#playlist ul li {
+padding: 0.35em 24px 0.35em 0.6em;
+margin: 0;
+font-size: 0.7em;
+font-weight: bold;
+color: #999;
+background-color: #191919;
+white-space: nowrap;
+border-bottom: 1px solid gray;
+cursor: pointer;
+}
+
+div#video-player div#playlist ul li:hover {
+background-color: #000;
+}
+
+div#video-player div#playlist ul li.selected {
+background-color: #000;
+}
+
+div#video-player div#playlist ul li a {
+display: block;
+color: #ccc;
+text-decoration: none;
+}
+
+div#video-player div#playlist ul li a:visited {
+color: #666;
+}
