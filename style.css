@@ -124,6 +124,7 @@ background-color: #191919;
 white-space: nowrap;
 border-bottom: 1px solid gray;
 cursor: pointer;
+-webkit-transition: background-color 0.2s linear;
 }
 
 div#video-player div#playlist ul li:hover {
