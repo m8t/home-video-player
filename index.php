@@ -19,7 +19,11 @@ $playlist = new Hmp\Playlist ();
       <video width="848" height="540" controls="controls">
 <?php
 if (isset ($_GET['hash'])) {
-	$playlist->get_source ($_GET['hash']);
+	$source = $playlist->get_source ($_GET['hash']);
+	if (!empty ($source)) {
+		$type = ($source['mimetype'] != NULL) ? "type=\"${source['mimetype']}\"" : NULL;
+		echo "<source src=\"${source['src']}\" $type />";
+	}
 }
 ?>
       </video>
@@ -27,7 +31,14 @@ if (isset ($_GET['hash'])) {
     <div id="playlist">
       <ul>
 <?php
-$playlist->get_playlist ();
+$items = $playlist->get_playlist ();
+foreach ($items as $item) {
+	if (isset ($_GET['hash']) && $_GET['hash'] == $item['hash'])
+		$li = 'li class="selected"';
+	else
+		$li = 'li';
+	echo "<$li><a href=\"index.php?hash=${item['hash']}\">${item['name']}</a></li>";
+}
 ?>
       </ul>
     </div>
@@ -41,3 +52,4 @@ $playlist->get_playlist ();
   </footer>
  </body>
 </html>
+

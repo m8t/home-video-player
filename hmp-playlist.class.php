@@ -22,13 +22,13 @@ class Playlist {
 		if ($this->conn == FALSE) {
 			return;
 		}
+		$source = array ();
 		$hash = pg_escape_string ($hash);
 		$result = pg_query ($this->conn, "SELECT hash, name FROM videos WHERE hash = '$hash';");
 		if (($row = pg_fetch_row ($result)) != FALSE) {
 			$hash = $row[0];
 			$name = $row[1];
 			$extension = preg_replace ('/.*\.([a-z]+)$/', '$1', $name);
-			echo "<!-- $extension -->";
 			switch ($extension) {
 				case "avi":
 					$mimetype = "video/divx";
@@ -36,26 +36,27 @@ class Playlist {
 				case "mkv":
 					$mimetype = "video/x-matroska";
 					break;
+				default:
+					$mimetype = NULL;
+					break;
 			}
-			if (isset ($mimetype))
-				$type = "type=\"$mimetype\"";
-			echo "<source src=\"media-files/$hash\" $type />";
+			$source['mimetype'] = $mimetype;
+			$source['src'] = "media-files/$hash";
 		}
+		return $source;
 	}
 	
 	public function get_playlist () {
 		if ($this->conn == FALSE) {
 			return;
 		}
+		$items = array ();
 		/* read lines from psql */
 		$result = pg_query ($this->conn, "SELECT hash, name FROM videos;");
 		while (($row = pg_fetch_row ($result)) != FALSE) {
-			if (isset ($_GET['hash']) && $_GET['hash'] == $row[0])
-				$li = 'li class="selected"';
-			else
-				$li = 'li';
-			echo "<$li><a href=\"index.php?hash=${row[0]}\">${row[1]}</a></li>";
+			array_push ($items, array ("hash" => $row[0], "name" => $row[1]));
 		}
+		return $items;
 	}
 	
 	public function add_item ($path) {

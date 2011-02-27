@@ -3,7 +3,7 @@ require "hmp-playlist.class.php";
 require "hmp-file-browser.class.php";
 $playlist = new Hmp\Playlist ();
 if (isset ($_GET['path']) && is_file ($_GET['path'])) {
-	$path = urldecode (path);
+	$path = urldecode ($_GET['path']);
 	$playlist->add_item ($path);
 }
 else if (isset ($_GET['hash'])) {
@@ -13,7 +13,7 @@ else if (isset ($_GET['hash'])) {
 <!DOCTYPE html>
 <html>
  <head>
-  <title>Home Video Player Administration</title>
+  <title>Administration - Home Video Player</title>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="style.css" />
  </head>
@@ -45,7 +45,14 @@ echo "</ul>";
     <div id="playlist">
       <ul>
 <?php
-$playlist->get_playlist ();
+$items = $playlist->get_playlist ();
+foreach ($items as $item) {
+	if (isset ($_GET['hash']) && $_GET['hash'] == $item['hash'])
+		$li = 'li class="selected"';
+	else
+		$li = 'li';
+	echo "<$li><a href=\"admin.php?hash=${item['hash']}\">${item['name']}</a></li>";
+}
 ?>
       </ul>
     </div>
@@ -59,3 +66,4 @@ $playlist->get_playlist ();
   </footer>
  </body>
 </html>
+
