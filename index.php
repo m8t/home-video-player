@@ -1,6 +1,6 @@
 <?php
-require "hmp-playlist.class.php";
-$playlist = new Hmp\Playlist ();
+require "hvp-playlist.class.php";
+$playlist = new Hvp\Playlist ();
 ?>
 <!DOCTYPE html>
 <html>

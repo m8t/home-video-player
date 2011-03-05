@@ -1,7 +1,7 @@
 <?php
-require "hmp-playlist.class.php";
-require "hmp-file-browser.class.php";
-$playlist = new Hmp\Playlist ();
+require "hvp-playlist.class.php";
+require "hvp-file-browser.class.php";
+$playlist = new Hvp\Playlist ();
 if (isset ($_GET['path']) && is_file ($_GET['path'])) {
 	$path = urldecode ($_GET['path']);
 	$playlist->add_item ($path);
@@ -34,7 +34,7 @@ else {
 	foreach ($directories as $directory) {
 		echo "<li><strong>$directory</strong></li>";
 		echo "<ul>";
-		Hmp\FileBrowser::read_dir ($directory);
+		Hvp\FileBrowser::read_dir ($directory);
 		echo "</ul>";
 	}
 }

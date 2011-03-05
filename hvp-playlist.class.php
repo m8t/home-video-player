@@ -1,5 +1,5 @@
 <?php
-namespace Hmp;
+namespace Hvp;
 require "config.php";
 class Playlist {
 

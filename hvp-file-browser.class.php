@@ -1,5 +1,5 @@
 <?php
-namespace Hmp;
+namespace Hvp;
 class FileBrowser {
 	function __construct () {
 	}
