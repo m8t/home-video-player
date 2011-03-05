@@ -59,8 +59,8 @@ if (isset ($_GET['hash'])) {
 if (HMP_VIDEO_BACKEND == "VLC") {
 ?>
       <div id="controls">
-        <input id="button-play-pause" type="button" value="Play/Pause" alt="Play/Pause [P]" />
-        <input id="button-fullscreen" type="button" value="Fullscreen" alt="Fullscreen [F]" />
+        <input id="button-play-pause" type="button" value="Play/Pause" title="Play/Pause [P]" />
+        <input id="button-fullscreen" type="button" value="Fullscreen" title="Fullscreen [F]" />
       </div>
 <?php
 }
