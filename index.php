@@ -16,17 +16,29 @@ $playlist = new Hmp\Playlist ();
   </header>
   <div id="video-player">
     <div id="video">
-      <video width="848" height="540" controls="controls">
+
+<embed type="application/x-vlc-plugin"
+	id="vlc-embed"
+	name="video"
+	width="848" height="540"
+	hidden="no" autoplay="yes" loop="no"
 <?php
 if (isset ($_GET['hash'])) {
 	$source = $playlist->get_source ($_GET['hash']);
 	if (!empty ($source)) {
-		$type = ($source['mimetype'] != NULL) ? "type=\"${source['mimetype']}\"" : NULL;
-		echo "<source src=\"${source['src']}\" $type />";
+		echo <<<EOF
+	target="${source['src']}"
+EOF;
 	}
 }
 ?>
-      </video>
+	/>
+
+      <div id="controls">
+        <input id="button-play-pause" type="button" value="Play/Pause" alt="Play/Pause [P]" />
+        <input id="button-fullscreen" type="button" value="Fullscreen" alt="Fullscreen [F]" />
+      </div>
+
     </div>
     <div id="playlist">
       <ul>

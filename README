@@ -1,20 +1,33 @@
-Home Video Player
+= Home Video Player =
 
 An HTML5 based video player for reading content from your PC on your other PCs.
 
-CONFIGURATION
+== REQUIREMENTS ==
 
-Web server: Apache, Lighttpd
-	PHP
-	PostgreSQL
+ * Web Server (Apache, Lighttpd)
+ * PHP5
+ * PostgreSQL
+ * VLC plugin for Mozilla (version > 0.8.5.1).
 
-INSTALLATION
+== INSTALLATION ==
 
-Copy directories.dist.php to directories.php.
-This file contains the local directories on your web server that contain video files.
+Copy config.dist.php to config.php.
 
-Create the PostgreSQL database videos right from the videos.sql file.
-$ createuser --no-superuser videos
-$ createdb videos
-$ psql videos videos -f videos.sql
+This file contains the local directories on your server that contain video files.
+It also contains the configuration for the PostgreSQL connection.
 
+Create the PostgreSQL database videos right from the videos.sql file:
+
+ $ createuser --no-superuser videos
+ $ createdb videos
+ $ psql videos videos -f videos.sql
+
+== REPORT BUGS ==
+
+The project can be cloned on github.
+https://github.com/m8t/home-video-player
+
+You can report bugs directly on github:
+https://github.com/m8t/home-video-player/issues
+
+To contact me send an email to mmassonnet@gmail.com.
