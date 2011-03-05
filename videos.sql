@@ -1,5 +1,5 @@
 CREATE TABLE videos (
-		id serial,
-		UNIQUE (hash character(32)),
+		id integer,
+		hash character(32) unique,
 		path text,
 		name text);
