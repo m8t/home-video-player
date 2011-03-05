@@ -6,9 +6,9 @@ An HTML5 based video player for reading content from your PC on your other PCs.
 
  * Web Server (Apache, Lighttpd)
  * PHP5
- * PostgreSQL
+ * SQLite3
 
-Video backends:
+== VIDEO BACKENDS ==
 
  * HTML5 capable browser with <video> support.
    - Divx Plus Web Player is recommended.
@@ -18,16 +18,12 @@ Video backends:
 
 == INSTALLATION ==
 
-Copy config.dist.php to config.php.
+Copy config.dist.php to config.php. This file contains the local directories on
+your server that contain video files.
 
-This file contains the local directories on your server that contain video files.
-It also contains the configuration for the PostgreSQL connection.
+Create the SQLite3 database "videos.db" right from the "videos.sql" file:
 
-Create the PostgreSQL database videos right from the videos.sql file:
-
- $ createuser --no-superuser videos
- $ createdb videos
- $ psql videos videos -f videos.sql
+ $ sqlite3 videos.db videos.sql
 
 == REPORT BUGS ==
 
