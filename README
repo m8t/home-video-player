@@ -7,7 +7,14 @@ An HTML5 based video player for reading content from your PC on your other PCs.
  * Web Server (Apache, Lighttpd)
  * PHP5
  * PostgreSQL
+
+Video backends:
+
+ * HTML5 capable browser with <video> support.
+   - Divx Plus Web Player is recommended.
+   - http://www.divx.com/en/software/divx-plus/web-player
  * VLC plugin for Mozilla (version > 0.8.5.1).
+   - http://www.videolan.org/vlc/
 
 == INSTALLATION ==
 

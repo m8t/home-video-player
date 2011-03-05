@@ -8,7 +8,6 @@ $playlist = new Hmp\Playlist ();
   <title><?php echo HMP_TITLE ?></title>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="style.css" />
-  <script src="video.js"></script>
  </head>
  <body>
   <header>
@@ -17,6 +16,10 @@ $playlist = new Hmp\Playlist ();
   <div id="video-player">
     <div id="video">
 
+<?php
+if (HMP_VIDEO_BACKEND == "VLC") {
+?>
+<script src="vlc.js"></script>
 <embed type="application/x-vlc-plugin"
 	id="vlc-embed"
 	name="video"
@@ -33,11 +36,35 @@ EOF;
 }
 ?>
 	/>
+<?php
+}
+else if (HMP_VIDEO_BACKEND == "HTML5") {
+?>
+      <video width="848" height="540" controls="controls">
+<?php
+if (isset ($_GET['hash'])) {
+	$source = $playlist->get_source ($_GET['hash']);
+	if (!empty ($source)) {
+		$type = ($source['mimetype'] != NULL) ? "type=\"${source['mimetype']}\"" : NULL;
+		echo "<source src=\"${source['src']}\" $type />\n";
+	}
+}
+?>
+      </video>
+<?php
+}
+?>
 
+<?php
+if (HMP_VIDEO_BACKEND == "VLC") {
+?>
       <div id="controls">
         <input id="button-play-pause" type="button" value="Play/Pause" alt="Play/Pause [P]" />
         <input id="button-fullscreen" type="button" value="Fullscreen" alt="Fullscreen [F]" />
       </div>
+<?php
+}
+?>
 
     </div>
     <div id="playlist">
