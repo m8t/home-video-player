@@ -5,14 +5,14 @@ $playlist = new Hmp\Playlist ();
 <!DOCTYPE html>
 <html>
  <head>
-  <title>Home Video Player</title>
+  <title><?php echo HMP_TITLE ?></title>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="style.css" />
   <script src="video.js"></script>
  </head>
  <body>
   <header>
-    <h1>Home Video Player</h1>
+    <h1><?php echo HMP_TITLE ?></h1>
   </header>
   <div id="video-player">
     <div id="video">
