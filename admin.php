@@ -69,7 +69,7 @@ echo "</ul>";
 /* ========== Configuration ========== */
 ?>
 
-<h1>General</h1>
+<h1>General Settings</h1>
 
 <ul>
 
@@ -88,6 +88,10 @@ echo "</ul>";
 
 </ul>
 
+<div>
+  <input type="button" value="Update" />
+</div>
+
 <h1>Directories</h1>
 
 <?php
@@ -97,6 +101,10 @@ foreach ($directories as $directory) {
 }
 echo "</ul>";
 ?>
+
+<div>
+  <input type="button" value="Edit" />
+</div>
 
 <?php
 /* !$_GET['action'] */
