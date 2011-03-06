@@ -1,12 +1,13 @@
 var vlc = null;
+
+// ========== Controls ========== //
 var button_play_pause = null;
 var button_fullscreen = null;
 
-window.onload = function () {
+function init_player_controls () {
 	controls_events ();
+	sync_slider (false);
 }
-
-// ========== Controls ========== //
 
 function controls_events () {
 	vlc = document.getElementById("vlc-embed");
@@ -77,5 +78,88 @@ function toggle_fullscreen () {
 	}
 
 	setTimeout ("vlc.playlist.play (); vlc.input.time = " + current_time + ";", 1000);
+}
+
+function sync_slider () {
+	if (slider != null)
+		set_handle_position (vlc.input.position);
+	setTimeout ("sync_slider (true);", 1000);
+}
+
+/* ========== Slider ========== */
+var handle_follow_mouse = false;
+var position = 0;
+var slider = null;
+var handle = null;
+
+function init_slider (slider_id, width, height) {
+	var childrens = document.getElementById (slider_id).getElementsByTagName ("div");
+	slider = childrens[0];
+	handle = childrens[1];
+
+	slider.style.width = width;
+	slider.style.height = height;
+	handle_size = parseInt (height) - 2;
+	handle.style.width = handle_size + "px";
+	handle.style.height = handle_size + "px";
+
+	slider.onmousedown = function () {
+		if (event.button == 0)
+			handle_follow_mouse = true;
+		return false;
+	}
+	window.onmouseup = function () {
+		handle_follow_mouse = false;
+		if (vlc != null) {
+			var stream_time = parseInt(vlc.input.length * position);
+			vlc.input.time = stream_time;
+		}
+		return false;
+	}
+	window.onmousemove = move_handle;
+}
+
+function get_mouse_position () {
+	var posx = 0;
+	var posy = 0;
+	if (!e) var e = window.event;
+	if (e.pageX || e.pageY) 	{
+		posx = e.pageX;
+		posy = e.pageY;
+	}
+	else if (e.clientX || e.clientY) 	{
+		posx = e.clientX + document.body.scrollLeft
+			+ document.documentElement.scrollLeft;
+		posy = e.clientY + document.body.scrollTop
+			+ document.documentElement.scrollTop;
+	}
+	return [posx, posy];
+}
+
+function move_handle () {
+	if (handle_follow_mouse == false)
+		return;
+
+	var mouse_position = get_mouse_position ();
+
+	var padding_left = parseInt (document.getElementById ("video-player").offsetLeft);
+	position = (mouse_position[0] - slider.offsetLeft - padding_left) / parseInt (slider.style.width);
+	if (position < 0)
+		position = 0;
+	else if (position > 1)
+		position = 1;
+
+	set_handle_position (position);
+}
+
+function set_handle_position (position) {
+	var slider_width = parseInt (slider.style.width);
+	var handle_width = parseInt (handle.style.width);
+	var handle_position = parseInt (position * (slider_width - handle_width));
+	if (handle_position < 1)
+		handle_position += 1;
+	else if (handle_position > (slider_width - handle_width - 1))
+		handle_position -= 1;
+	handle.style.left = handle_position + "px";
 }
 

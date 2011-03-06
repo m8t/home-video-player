@@ -35,6 +35,33 @@ position: relative;
 width: 848px;
 background-color: #090909;
 border-top: solid gray 1px;
+text-align: right;
+}
+
+div#video-player div#controls input#button-play-pause {
+float: left;
+}
+
+div#video-player div#slider {
+float: left;
+margin: 4px 2px;
+}
+
+div#video-player div#slider .slider-bar {
+background: #191919;
+border-radius: 2px;
+-moz-border-radius: 2px;
+border: 1px gray solid;
+overflow: hidden;
+}
+
+div#video-player div#slider .slider-handle {
+position: relative;
+top: 1px;
+left: 1px;
+background: #999;
+border-radius: 2px;
+-moz-border-radius: 2px;
 }
 
 /* ========== Playlist ========== */

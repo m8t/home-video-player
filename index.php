@@ -8,6 +8,20 @@ $playlist = new Hvp\Playlist ();
   <title><?php echo HMP_TITLE ?></title>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="style.css" />
+  <script>
+//<!--
+window.onload = function () {
+<?php
+if (HMP_VIDEO_BACKEND == "VLC") {
+?>
+	init_player_controls ();
+	init_slider ('slider', '630px', '16px');
+<?php
+}
+?>
+}
+//-->
+  </script>
  </head>
  <body>
   <header>
@@ -61,6 +75,11 @@ if (HMP_VIDEO_BACKEND == "VLC") {
       <div id="controls">
         <input id="button-play-pause" type="button" value="Play/Pause" title="Play/Pause [P]" />
         <input id="button-fullscreen" type="button" value="Fullscreen" title="Fullscreen [F]" />
+	<div id="slider">
+	  <div class="slider-bar">
+	    <div class="slider-handle"></div>
+	  </div>
+	</div>
       </div>
 <?php
 }
