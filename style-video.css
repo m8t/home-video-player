@@ -37,13 +37,38 @@ text-decoration: none;
 div#video-player div#controls {
 position: relative;
 width: 848px;
+font-size: 12px;
 background-color: #090909;
 border-top: solid gray 1px;
 text-align: right;
 }
 
+div#video-player div#controls input[type="button"] {
+margin: 3px 2px;
+font-size: 12px;
+color: #ccc;
+background-color: #111;
+border-radius: 2px;
+-moz-border-radius: 2px;
+border: 1px solid gray;
+}
+
+div#video-player div#controls input[type="button"]:hover {
+background-color: #090909;
+-webkit-transition: background-color 0.2s linear;
+}
+
 div#video-player div#controls input#button-play-pause {
 float: left;
+}
+
+div#video-player div#controls span#video-length {
+font-size: 12px;
+background-color: #111;
+padding: 1px 4px;
+border: 1px solid gray;
+border-radius: 2px;
+-moz-border-radius: 2px;
 }
 
 div#video-player div#slider {

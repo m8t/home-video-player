@@ -1,6 +1,6 @@
 div#admin {
-font-size: 0.8em;
 overflow: auto;
+font-size: 0.8em;
 height: 540px;
 }
 
@@ -12,6 +12,7 @@ border-top-left-radius: 0.1em;
 -moz-border-radius-topright: 0.1em;
 border-top-right-radius: 0.1em;
 background-color: #ccc;
+background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(gray));
 color: #111;
 font-size: 1.8em;
 height: 2em;
