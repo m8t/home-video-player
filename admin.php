@@ -58,11 +58,9 @@ foreach ($items as $item) {
     </div>
   </div>
   <footer>
-    <ul>
-      <li><a href="index.php">Player</a></li>
-      <li><a href="admin.php">Administration</a></li>
-      <li><a href="http://www.divx.com/en/software/divx-plus/web-player">Get DivX Plus Web Player</a></li>
-    </ul>
+<?php
+require "footer.php";
+?>
   </footer>
  </body>
 </html>
