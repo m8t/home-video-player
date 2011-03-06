@@ -2,10 +2,6 @@
 $directories = array ('/home/<USER>/Videos',
 		'/media/Movies');
 
-define ('PSQLITE_HOSTNAME', 'localhost');
-define ('PSQLITE_DATABASE', 'videos');
-define ('PSQLITE_USERNAME', 'videos');
-
 /**
  * HMP_VIDEO_BACKEND:
  * Type of backend to use for video playback. Can be:

@@ -28,6 +28,10 @@ div#video-player div#video div a:visited {
 color: #446;
 }
 
+div#video-player div#video div a:hover {
+text-decoration: none;
+}
+
 /* ========== Controls ========== */
 
 div#video-player div#controls {

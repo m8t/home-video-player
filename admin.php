@@ -16,6 +16,7 @@ else if (isset ($_GET['hash'])) {
   <title>Administration - Home Video Player</title>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style-admin.css" />
  </head>
  <body>
   <header>
@@ -23,9 +24,26 @@ else if (isset ($_GET['hash'])) {
   </header>
   <div id="video-player">
     <div id="video">
-      <div style="padding: 1em; font-size: 0.8em; overflow: auto; height: 520px;">
+      <div id="admin">
+
+	<div id="admin-tabs">
+	  <ul>
+	    <li><a href="?action=file-browser">File Browser</a></li>
+	    <li><a href="?action=configuration">Configuration</a></li>
+	</div>
+
+        <div id="admin-content">
+
 <?php
-/* File browser */
+/* $_GET['action'] */
+switch ($_GET['action']) {
+
+	case "file-browser":
+	default:
+?>
+
+<?php
+/* ========== File browser ========== */
 echo "<ul>";
 if (!isset ($directories)) {
 	echo "<li>File directories.php not set</li>";
@@ -40,6 +58,53 @@ else {
 }
 echo "</ul>";
 ?>
+
+<?php
+	break;
+	case "configuration":
+?>
+
+<?php
+/* ========== Configuration ========== */
+?>
+
+<h1>General</h1>
+
+<ul>
+
+  <li>
+    Title:
+    <input type="text" value="<?php echo HMP_TITLE; ?>" disabled />
+  </li>
+
+  <li>
+    Video backend:
+    <select disabled>
+      <option <?php echo (HMP_VIDEO_BACKEND == "HTML5") ? "selected" : "" ?>>HTML5</option>
+      <option <?php echo (HMP_VIDEO_BACKEND == "VLC") ? "selected" : "" ?>>VLC</option>
+    </select>
+  </li>
+
+</ul>
+
+<h1>Directories</h1>
+
+<?php
+echo "<ul>";
+foreach ($directories as $directory) {
+	echo "<li>$directory</li>";
+}
+echo "</ul>";
+?>
+
+<?php
+/* !$_GET['action'] */
+	break;
+}
+?>
+
+        </div>
+
       </div>
     </div>
     <div id="playlist">

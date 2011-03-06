@@ -1,0 +1,53 @@
+div#admin {
+font-size: 0.8em;
+overflow: auto;
+height: 540px;
+}
+
+/* ========== Tabs ========== */
+
+div#admin-tabs {
+-moz-border-radius-topleft: 0.1em;
+border-top-left-radius: 0.1em;
+-moz-border-radius-topright: 0.1em;
+border-top-right-radius: 0.1em;
+background-color: #ccc;
+color: #111;
+font-size: 1.8em;
+height: 2em;
+line-height: 2em;
+}
+
+div#admin-tabs a {
+color: inherit !important;
+text-decoration: none;
+}
+
+div#admin-tabs ul {
+display: inline;
+list-style: none;
+}
+
+div#admin-tabs ul li {
+display: inline;
+margin-right: 1em;
+}
+
+
+/* ========== Content ========== */
+
+div#admin-content {
+padding: 1em;
+}
+
+div#admin-content ul {
+margin-left: 0em;
+padding-left: 2em;
+}
+
+/* ========== Playlist ========== */
+
+div#playlist a:hover {
+text-decoration: line-through !important;
+}
+
