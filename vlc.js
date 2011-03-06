@@ -84,8 +84,9 @@ function sync_slider () {
 	if (slider != null && handle_follow_mouse == false) {
 		set_handle_position (vlc.input.position);
 	}
+
 	var video_length = document.getElementById ("video-length");
-	if (video_length != null) {
+	if (vlc.input.state != 0 && video_length != null) {
 		var length = parseInt (vlc.input.length / 1000);
 		var total_min = parseInt (length / 60);
 		var total_sec = length - (total_min * 60);
@@ -98,6 +99,7 @@ function sync_slider () {
 			current_sec = "0" + current_sec;
 		video_length.innerHTML = current_min + ":" + current_sec + " / " + total_min + ":" + total_sec;
 	}
+
 	setTimeout ("sync_slider (true);", 1000);
 }
 
