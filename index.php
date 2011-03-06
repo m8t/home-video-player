@@ -73,7 +73,7 @@ if (isset ($_GET['hash'])) {
 if (HMP_VIDEO_BACKEND == "VLC") {
 ?>
       <div id="controls">
-	<span id="video-length"></span>
+	<span id="video-length">0:00 / 0:00</span>
         <input id="button-play-pause" type="button" value="Play/Pause" title="Play/Pause [P]" />
         <input id="button-fullscreen" type="button" value="Fullscreen" title="Fullscreen [F]" />
 	<div id="slider">
