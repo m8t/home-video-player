@@ -81,8 +81,23 @@ function toggle_fullscreen () {
 }
 
 function sync_slider () {
-	if (slider != null)
+	if (slider != null && handle_follow_mouse == false) {
 		set_handle_position (vlc.input.position);
+	}
+	var video_length = document.getElementById ("video-length");
+	if (video_length != null) {
+		var length = parseInt (vlc.input.length / 1000);
+		var total_min = parseInt (length / 60);
+		var total_sec = length - (total_min * 60);
+		if (total_sec < 10)
+			total_sec = "0" + total_sec;
+		var current_time = parseInt (vlc.input.time / 1000);
+		var current_min = parseInt (current_time / 60);
+		var current_sec = current_time - (current_min * 60);
+		if (current_sec < 10)
+			current_sec = "0" + current_sec;
+		video_length.innerHTML = current_min + ":" + current_sec + " / " + total_min + ":" + total_sec;
+	}
 	setTimeout ("sync_slider (true);", 1000);
 }
 

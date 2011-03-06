@@ -15,7 +15,7 @@ window.onload = function () {
 if (HMP_VIDEO_BACKEND == "VLC") {
 ?>
 	init_player_controls ();
-	init_slider ('slider', '630px', '16px');
+	init_slider ('slider', '560px', '16px');
 <?php
 }
 ?>
@@ -73,6 +73,7 @@ if (isset ($_GET['hash'])) {
 if (HMP_VIDEO_BACKEND == "VLC") {
 ?>
       <div id="controls">
+	<span id="video-length"></span>
         <input id="button-play-pause" type="button" value="Play/Pause" title="Play/Pause [P]" />
         <input id="button-fullscreen" type="button" value="Fullscreen" title="Fullscreen [F]" />
 	<div id="slider">
