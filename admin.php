@@ -28,6 +28,7 @@ else if (isset ($_GET['hash'])) {
 
 	<div id="admin-tabs">
 	  <ul>
+	    <li><a href="index.php">← Back</a></li>
 	    <li><a href="?action=file-browser">File Browser</a></li>
 	    <li><a href="?action=configuration">Configuration</a></li>
 	</div>
