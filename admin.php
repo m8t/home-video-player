@@ -31,6 +31,7 @@ else if (isset ($_GET['hash'])) {
 	    <li><a href="index.php">← Back</a></li>
 	    <li><a href="?action=file-browser">File Browser</a></li>
 	    <li><a href="?action=configuration">Configuration</a></li>
+	  </ul>
 	</div>
 
         <div id="admin-content">

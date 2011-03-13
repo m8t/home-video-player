@@ -6,7 +6,7 @@ class Playlist {
 	private $conn = NULL;
 
 	function __construct () {
-		/* connect to sqlite */
+		/* connect to db */
 		if (!is_writable ('.') && !file_exists ("videos.db")) {
 			echo "Failed to create SQLite database! Directory is not writable.";
 		}
@@ -52,7 +52,7 @@ class Playlist {
 			return;
 		}
 		$items = array ();
-		/* read lines from psql */
+		/* read lines from db */
 		$result = $this->conn->query ("SELECT hash, name FROM videos;");
 		while (($row = $result->fetchArray ()) != FALSE) {
 			array_push ($items, array ("hash" => $row[0], "name" => $row[1]));
@@ -65,7 +65,7 @@ class Playlist {
 			return;
 		}
 		$hash = md5 ($path);
-		/* insert line into pgsql */
+		/* insert line into db */
 		$path_escaped = $this->conn->escapeString ($path);
 		$name_escaped = $this->conn->escapeString (basename ($path));
 		$this->conn->exec ("INSERT INTO videos (hash, path, name) VALUES ('$hash', '$path_escaped', '$name_escaped');");
@@ -80,7 +80,7 @@ class Playlist {
 		if ($this->conn == NULL) {
 			return;
 		}
-		/* delete line from pgsql */
+		/* delete line from db */
 		$hash_escaped = $this->conn->escapeString ($hash);
 		if ($this->conn->exec ("DELETE FROM videos WHERE hash = '$hash_escaped';") != FALSE) {
 			unlink ("media-files/$hash");

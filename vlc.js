@@ -6,7 +6,7 @@ var button_fullscreen = null;
 
 function init_player_controls () {
 	controls_events ();
-	sync_slider (false);
+	sync_slider ();
 }
 
 function controls_events () {
@@ -100,7 +100,7 @@ function sync_slider () {
 		video_length.innerHTML = current_min + ":" + current_sec + " / " + total_min + ":" + total_sec;
 	}
 
-	setTimeout ("sync_slider (true);", 1000);
+	setTimeout ("sync_slider ();", 1000);
 }
 
 /* ========== Slider ========== */
