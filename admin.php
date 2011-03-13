@@ -1,7 +1,14 @@
 <?php
+require "config.php";
 require "hvp-playlist.class.php";
 require "hvp-file-browser.class.php";
+require "hvp-settings.class.php";
+
+$settings = new Hvp\Settings ();
+
 $playlist = new Hvp\Playlist ();
+
+/* add a new item into the playlist or remove one */
 if (isset ($_GET['path']) && is_file ($_GET['path'])) {
 	$path = urldecode ($_GET['path']);
 	$playlist->add_item ($path);
@@ -9,11 +16,21 @@ if (isset ($_GET['path']) && is_file ($_GET['path'])) {
 else if (isset ($_GET['hash'])) {
 	$playlist->remove_item ($_GET['hash']);
 }
+
+/* update settings */
+if (isset ($_GET['action']) && $_GET['action'] == "configuration") {
+	if (isset ($_POST['title']) && !empty ($_POST['title'])) {
+		$settings->set_value ("/general/title", $_POST['title']);
+	}
+	if (isset ($_POST['video-backend'])) {
+		$settings->set_value ("/general/video-backend", $_POST['video-backend']);
+	}
+}
 ?>
 <!DOCTYPE html>
 <html>
  <head>
-  <title>Administration - Home Video Player</title>
+  <title>Administration - <?php echo $settings->title; ?></title>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="style-admin.css" />
@@ -72,26 +89,32 @@ echo "</ul>";
 
 <h1>General Settings</h1>
 
+<form method="post" action="admin.php?action=configuration">
 <ul>
 
   <li>
     Title:
-    <input type="text" value="<?php echo HMP_TITLE; ?>" disabled />
+    <input type="text" name="title" value="<?php echo $settings->title; ?>" />
   </li>
 
+<?php
+$video_backend = $settings->get_value ("/general/video-backend");
+?>
   <li>
     Video backend:
-    <select disabled>
-      <option <?php echo (HMP_VIDEO_BACKEND == "HTML5") ? "selected" : "" ?>>HTML5</option>
-      <option <?php echo (HMP_VIDEO_BACKEND == "VLC") ? "selected" : "" ?>>VLC</option>
+    <select name="video-backend">
+      <option <?php echo ($video_backend == "HTML5") ? "selected" : "" ?>>HTML5</option>
+      <option <?php echo ($video_backend == "VLC") ? "selected" : "" ?>>VLC</option>
     </select>
   </li>
 
 </ul>
 
 <div>
-  <input type="button" value="Update" />
+  <input type="submit" value="Update" />
 </div>
+
+</form>
 
 <h1>Directories</h1>
 

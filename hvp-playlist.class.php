@@ -1,19 +1,13 @@
 <?php
 namespace Hvp;
-require "config.php";
+require_once "hvp-data-connector.class.php";
 class Playlist {
 
 	private $conn = NULL;
 
 	function __construct () {
-		/* connect to db */
-		if (!is_writable ('.') && !file_exists ("videos.db")) {
-			echo "Failed to create SQLite database! Directory is not writable.";
-		}
-		else {
-			// FIXME Exception is not caught through try/catch
-			$this->conn = new \SQLite3 ("videos.db");
-		}
+		/* create data-connector object */
+		$this->conn = new DataConnector ();
 	}
 	
 	function __destruct () {

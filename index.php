@@ -1,18 +1,21 @@
 <?php
 require "hvp-playlist.class.php";
+require "hvp-settings.class.php";
 $playlist = new Hvp\Playlist ();
+$settings = new Hvp\Settings ();
+$video_backend = $settings->get_value ("/general/video-backend");
 ?>
 <!DOCTYPE html>
 <html>
  <head>
-  <title><?php echo HMP_TITLE ?></title>
+  <title><?php echo $settings->title ?></title>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="style.css" />
   <script>
 //<!--
 window.onload = function () {
 <?php
-if (HMP_VIDEO_BACKEND == "VLC") {
+if ($video_backend == "VLC") {
 ?>
 	init_player_controls ();
 	init_slider ('slider', '560px', '16px');
@@ -25,13 +28,13 @@ if (HMP_VIDEO_BACKEND == "VLC") {
  </head>
  <body>
   <header>
-    <h1><?php echo HMP_TITLE ?></h1>
+    <h1><?php echo $settings->title ?></h1>
   </header>
   <div id="video-player">
     <div id="video">
 
 <?php
-if (HMP_VIDEO_BACKEND == "VLC") {
+if ($video_backend == "VLC") {
 ?>
 <script src="vlc.js"></script>
 <embed type="application/x-vlc-plugin"
@@ -52,7 +55,7 @@ EOF;
 	/>
 <?php
 }
-else if (HMP_VIDEO_BACKEND == "HTML5") {
+else if ($video_backend == "HTML5") {
 ?>
       <video width="848" height="540" controls="controls">
 <?php
@@ -70,7 +73,7 @@ if (isset ($_GET['hash'])) {
 ?>
 
 <?php
-if (HMP_VIDEO_BACKEND == "VLC") {
+if ($video_backend == "VLC") {
 ?>
       <div id="controls">
 	<span id="video-length">0:00 / 0:00</span>
