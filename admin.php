@@ -1,8 +1,8 @@
 <?php
 require "config.php";
-require "hvp-playlist.class.php";
-require "hvp-file-browser.class.php";
-require "hvp-settings.class.php";
+require_once "hvp-playlist.class.php";
+require_once "hvp-file-browser.class.php";
+require_once "hvp-settings.class.php";
 
 $settings = new Hvp\Settings ();
 
@@ -18,13 +18,17 @@ else if (isset ($_GET['hash'])) {
 }
 
 /* update settings */
-if (isset ($_GET['action']) && $_GET['action'] == "configuration") {
+if (isset ($_GET['action']) && $_GET['action'] == "configuration" && !empty ($_POST)) {
 	if (isset ($_POST['title']) && !empty ($_POST['title'])) {
 		$settings->set_value ("/general/title", $_POST['title']);
 	}
+
 	if (isset ($_POST['video-backend'])) {
 		$settings->set_value ("/general/video-backend", $_POST['video-backend']);
 	}
+
+	$value = (!isset ($_POST['autoplay'])) ? "false" : "true";
+	$settings->set_value ("/general/autoplay", $value);
 }
 ?>
 <!DOCTYPE html>
@@ -55,7 +59,8 @@ if (isset ($_GET['action']) && $_GET['action'] == "configuration") {
 
 <?php
 /* $_GET['action'] */
-switch ($_GET['action']) {
+$action = (isset ($_GET['action'])) ? $_GET['action'] : "";
+switch ($action) {
 
 	case "file-browser":
 	default:
@@ -63,7 +68,7 @@ switch ($_GET['action']) {
 
 <?php
 /* ========== File browser ========== */
-echo "<ul>";
+echo "<ul id=\"file-browser\">";
 if (!isset ($directories)) {
 	echo "<li>File directories.php not set</li>";
 }
@@ -108,6 +113,11 @@ $video_backend = $settings->get_value ("/general/video-backend");
     </select>
   </li>
 
+  <li>
+    <input <?php echo ($settings->autoplay == "true") ? "checked" : "" ?> type="checkbox" name="autoplay" id="autoplay" value="true" />
+    <label for="autoplay">Autoplay</label>
+  </li>
+
 </ul>
 
 <div>
@@ -118,13 +128,13 @@ $video_backend = $settings->get_value ("/general/video-backend");
 
 <h1>Directories</h1>
 
+<ul id="directories">
 <?php
-echo "<ul>";
 foreach ($directories as $directory) {
 	echo "<li>$directory</li>";
 }
-echo "</ul>";
 ?>
+</ul>
 
 <div>
   <input type="button" value="Edit" />

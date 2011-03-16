@@ -1,6 +1,6 @@
 <?php
-require "hvp-playlist.class.php";
-require "hvp-settings.class.php";
+require_once "hvp-playlist.class.php";
+require_once "hvp-settings.class.php";
 $playlist = new Hvp\Playlist ();
 $settings = new Hvp\Settings ();
 $video_backend = $settings->get_value ("/general/video-backend");
@@ -41,7 +41,7 @@ if ($video_backend == "VLC") {
 	id="vlc-embed"
 	name="video"
 	width="848" height="540"
-	hidden="no" autoplay="yes" loop="no"
+	hidden="no" autoplay="<?php echo ($settings->autoplay == "true") ? "yes" : "no"; ?>" loop="no"
 <?php
 if (isset ($_GET['hash'])) {
 	$source = $playlist->get_source ($_GET['hash']);
@@ -57,7 +57,7 @@ EOF;
 }
 else if ($video_backend == "HTML5") {
 ?>
-      <video width="848" height="540" controls="controls">
+      <video width="848" height="540" controls="controls" <?php echo ($settings->autoplay == "true") ? "autoplay=\"autoplay\"" : ""; ?>>
 <?php
 if (isset ($_GET['hash'])) {
 	$source = $playlist->get_source ($_GET['hash']);
