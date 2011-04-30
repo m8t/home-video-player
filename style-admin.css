@@ -62,7 +62,44 @@ list-style: none;
 
 /* ========== Playlist ========== */
 
-div#playlist a:hover {
+div#side-panel-inner div#playlist ul {
+margin: 0;
+padding: 0;
+display: block;
+list-style: none;
+}
+
+div#side-panel-inner div#playlist ul li {
+padding: 0.35em 24px 0.35em 0.6em;
+margin: 0;
+font-size: 0.7em;
+font-weight: bold;
+color: #999;
+background-color: #191919;
+border-bottom: 1px solid gray;
+cursor: pointer;
+-webkit-transition: background-color 0.2s linear;
+}
+
+div#side-panel-inner div#playlist ul li:hover {
+background-color: #000;
+}
+
+div#side-panel-inner div#playlist ul li.selected {
+background-color: #000;
+}
+
+div#side-panel-inner div#playlist ul li a {
+display: block;
+color: #ccc;
+text-decoration: none;
+}
+
+div#side-panel-inner div#playlist ul li a:visited {
+color: #666;
+}
+
+div#side-panel-inner div#playlist a:hover {
 text-decoration: line-through !important;
 }
 

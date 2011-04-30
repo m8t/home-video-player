@@ -43,8 +43,8 @@ if (isset ($_GET['action']) && $_GET['action'] == "configuration" && !empty ($_P
   <header>
     <h1>Home Video Player Administration</h1>
   </header>
-  <div id="video-player">
-    <div id="video">
+  <div id="content-wrapper">
+    <div id="main-content">
       <div id="admin">
 
 	<div id="admin-tabs">
@@ -110,6 +110,7 @@ $video_backend = $settings->get_value ("/general/video-backend");
     <select name="video-backend">
       <option <?php echo ($video_backend == "HTML5") ? "selected" : "" ?>>HTML5</option>
       <option <?php echo ($video_backend == "VLC") ? "selected" : "" ?>>VLC</option>
+      <option <?php echo ($video_backend == "WMP") ? "selected" : "" ?>>WMP</option>
     </select>
   </li>
 
@@ -150,7 +151,7 @@ foreach ($directories as $directory) {
 
       </div>
     </div>
-    <div id="playlist">
+    <div id="side-panel-wrapper"><div id="side-panel-inner"><div id="playlist">
       <ul>
 <?php
 $items = $playlist->get_playlist ();
@@ -163,7 +164,7 @@ foreach ($items as $item) {
 }
 ?>
       </ul>
-    </div>
+    </div></div></div>
   </div>
   <footer>
 <?php

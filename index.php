@@ -11,6 +11,7 @@ $video_backend = $settings->get_value ("/general/video-backend");
   <title><?php echo $settings->title ?></title>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style-video.css" />
   <script>
 //<!--
 window.onload = function () {
@@ -30,11 +31,26 @@ if ($video_backend == "VLC") {
   <header>
     <h1><?php echo $settings->title ?></h1>
   </header>
-  <div id="video-player">
-    <div id="video">
+  <div id="content-wrapper"><div id="video-player">
+    <div id="main-content">
 
 <?php
-if ($video_backend == "VLC") {
+if ($video_backend == "HTML5") {
+?>
+      <video width="848" height="540" controls="controls" <?php echo ($settings->autoplay == "true") ? "autoplay=\"autoplay\"" : ""; ?>>
+<?php
+if (isset ($_GET['hash'])) {
+	$source = $playlist->get_source ($_GET['hash']);
+	if (!empty ($source)) {
+		$type = ($source['mimetype'] != NULL) ? "type=\"${source['mimetype']}\"" : NULL;
+		echo "<source src=\"${source['src']}\" $type />\n";
+	}
+}
+?>
+      </video>
+<?php
+}
+else if ($video_backend == "VLC") {
 ?>
 <script src="vlc.js"></script>
 <embed type="application/x-vlc-plugin"
@@ -55,19 +71,26 @@ EOF;
 	/>
 <?php
 }
-else if ($video_backend == "HTML5") {
+else if ($video_backend == "WMP") {
 ?>
-      <video width="848" height="540" controls="controls" <?php echo ($settings->autoplay == "true") ? "autoplay=\"autoplay\"" : ""; ?>>
+<object id="wmp-embed"
+	width="848" height="540"
+	classid="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6"
+	type="application/x-oleobject">
 <?php
 if (isset ($_GET['hash'])) {
 	$source = $playlist->get_source ($_GET['hash']);
 	if (!empty ($source)) {
-		$type = ($source['mimetype'] != NULL) ? "type=\"${source['mimetype']}\"" : NULL;
-		echo "<source src=\"${source['src']}\" $type />\n";
+		echo <<<EOF
+	<param name="URL" value="${source['src']}" />
+EOF;
 	}
 }
 ?>
-      </video>
+	<param name="SendPlayStateChangeEvents" value="true">
+	<param name="uiMode" value="full" />
+	<param name="AutoStart" value="<?php echo ($settings->autoplay == "true") ? "true" : "false"; ?>" />
+</object>
 <?php
 }
 ?>
@@ -90,7 +113,7 @@ if ($video_backend == "VLC") {
 ?>
 
     </div>
-    <div id="playlist">
+    <div id="side-panel-wrapper"><div id="side-panel-inner"><div id="playlist">
       <ul>
 <?php
 $items = $playlist->get_playlist ();
@@ -99,12 +122,12 @@ foreach ($items as $item) {
 		$li = 'li class="selected"';
 	else
 		$li = 'li';
-	echo "<$li><a href=\"index.php?hash=${item['hash']}\">${item['name']}</a></li>";
+	echo "<$li><a style=\"float: right; position: absolute; margin-left: -5px; margin-top: -4px; color: #00bb00\" href=\"media-files/${item['hash']}\">⇩</a><a style=\"margin-left: 3px;\" href=\"index.php?hash=${item['hash']}\">${item['name']}</a></li>";
 }
 ?>
       </ul>
-    </div>
-  </div>
+    </div></div></div>
+  </div></div>
   <footer>
 <?php
 require "footer.php";
