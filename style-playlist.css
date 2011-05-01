@@ -1,0 +1,61 @@
+/* ========== Playlist ========== */
+
+div#playlist {
+margin: 0.6em;
+}
+
+div#playlist {
+font-size: 1.2em;
+}
+
+div#playlist > p {
+font-weight: bold;
+}
+
+div#playlist > ol {
+font-size: 1.1em;
+}
+
+div#playlist > ol li {
+margin: 0.2em 0;
+}
+
+/* ========== Action panel ========== */
+
+div#action-panel ul {
+margin: 0;
+padding: 0;
+display: block;
+list-style: none;
+}
+
+div#action-panel ul li {
+padding: 0.35em 24px 0.35em 0.6em;
+margin: 0;
+font-size: 0.7em;
+font-weight: bold;
+color: #999;
+background-color: #191919;
+border-bottom: 1px solid gray;
+cursor: pointer;
+-webkit-transition: background-color 0.2s linear;
+}
+
+div#action-panel ul li:hover {
+background-color: #000;
+}
+
+div#action-panel ul li.selected {
+background-color: #000;
+}
+
+div#action-panel ul li a {
+display: block;
+color: #ccc;
+text-decoration: none;
+}
+
+div#action-panel ul li a:visited {
+color: #666;
+}
+
