@@ -23,6 +23,10 @@ if (isset ($_GET['action']) && $_GET['action'] == "configuration" && !empty ($_P
 		$settings->set_value ("/general/title", $_POST['title']);
 	}
 
+	if (isset ($_POST['interface'])) {
+		$settings->set_value ("/general/interface", $_POST['interface']);
+	}
+
 	if (isset ($_POST['video-backend'])) {
 		$settings->set_value ("/general/video-backend", $_POST['video-backend']);
 	}
@@ -49,7 +53,7 @@ if (isset ($_GET['action']) && $_GET['action'] == "configuration" && !empty ($_P
 
 	<div id="admin-tabs">
 	  <ul>
-	    <li><a href="index.php">← Back</a></li>
+	    <li><a href="./">← Back</a></li>
 	    <li><a href="?action=file-browser">File Browser</a></li>
 	    <li><a href="?action=configuration">Configuration</a></li>
 	  </ul>
@@ -100,6 +104,17 @@ echo "</ul>";
   <li>
     Title:
     <input type="text" name="title" value="<?php echo $settings->title; ?>" />
+  </li>
+
+<?php
+$interface = $settings->interface;
+?>
+  <li>
+    Interface:
+    <select name="interface">
+      <option <?php echo ($interface == "index") ? "selected" : "" ?> value="index">Index</option>
+      <option <?php echo ($interface == "playlist") ? "selected" : "" ?> value="playlist">Playlist</option>
+    </select>
   </li>
 
 <?php

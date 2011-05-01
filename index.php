@@ -1,9 +1,16 @@
 <?php
-require_once "hvp-playlist.class.php";
 require_once "hvp-settings.class.php";
-$playlist = new Hvp\Playlist ();
+require_once "hvp-playlist.class.php";
 $settings = new Hvp\Settings ();
+
+$interface = $settings->interface;
+if (preg_match ("/\/$/", $_SERVER["REQUEST_URI"]) && $interface == "playlist") {
+	header ("Location: playlist.php");
+}
+
 $video_backend = $settings->get_value ("/general/video-backend");
+
+$playlist = new Hvp\Playlist ();
 ?>
 <!DOCTYPE html>
 <html>
